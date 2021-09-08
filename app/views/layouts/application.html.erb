@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AirBnBClone</title>
+    <title><%= yield(:title) %> | AirBnB-Clone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/footer' %>
     <%= yield %>
   </body>
 </html>
