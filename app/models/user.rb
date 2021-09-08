@@ -7,5 +7,6 @@ class User < ApplicationRecord
                       uniqueness: { case_sensitive: false }
     has_secure_password
     validates :password, length: { minimum: 6 } 
-    validates :contuct_number, presence: false, length: { maximum: 140 }
+    validates :contuct_number, presence: true, length: { maximum: 50 }
+    validates :profile, presence: false, length: { maximum: 140}
 end
