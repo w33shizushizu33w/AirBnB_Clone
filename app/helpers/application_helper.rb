@@ -8,5 +8,5 @@ module ApplicationHelper
           flash_messages << text.html_safe if message
         end
         flash_messages.join("\n").html_safe
-      end
+    end
 end

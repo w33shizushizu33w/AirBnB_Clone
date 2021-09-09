@@ -23,6 +23,10 @@
  body {
      background-color: $favorite-color;
  }
- 
 
-
+ .toast-success {
+    background-color: $success;
+ }
+ .toast-error {
+    background-color: $danger;
+ }
