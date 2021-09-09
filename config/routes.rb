@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  resources :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations',
+  }
+
   root 'home_pages#home'
   get 'home_pages/home'
   get 'home_pages/about', to: 'home_pages#about'
   get 'home_pages/contact', to: 'home_pages#contact'
-  get '/signup', to: 'users#new' 
+  resources :users
 end
