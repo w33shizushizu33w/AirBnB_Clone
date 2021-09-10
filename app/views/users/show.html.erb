@@ -1,0 +1,54 @@
+<%= provide(:title, "Profile") %>
+<div class="container row offset-1 mt-4">
+    <div class="card" style="width: 18rem; max-height: 500px;">
+        <%= image_tag "birds_icon.png", class: "card-img-top" %>
+            <div class="card-body">
+                <h5 class="card-title"><%= @user.email %></h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+    </div>
+    <div class="ml-5">
+        <h1><%= @user.name %></h1>
+        <div class="mt-4">
+            <h1>Listings</h1>
+            <%= render 'home_pages/form' %>
+        </div>
+        <div class="mt-4">
+            <h1>Reviews from Guests</h1>
+            <section class="offset-2 mt-3">
+                <% @users.each do |user| %>
+                <div class="card mb-3 w-50">
+                    <div class="row no-gutters">
+                        <div class="col-md-2 ml-3">
+                            <%= gravatar_for @user, class: "card-img" %>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h6 class="card-title"><%= @user.name %></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+            </section>
+        </div>
+        <hr width="700" align="center">
+        <div class="mt-4">
+            <h1>Reviews from Hosts</h1>
+                <section class="offset-2 mt-3">
+                    <div class="card mb-3 w-50">
+                        <div class="row no-gutters">
+                            <div class="col-md-2 ml-3">
+                                <%= gravatar_for @user, class: "card-img" %>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title"><%= @user.name %></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+    </div>
+</div>
