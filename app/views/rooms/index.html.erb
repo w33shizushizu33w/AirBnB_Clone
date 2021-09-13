@@ -7,15 +7,14 @@
         <div class="card container mt-4">
             <div class="card-header">
                 <h3>Your Listings<h3>
-            </div>
-    
+            </div>   
                 <% @rooms.each do |room| %> 
                 <div class="card-body row">            
                     <%= image_tag room, style: 'width: 100px; height: 100px;' %>
                     <div class="ml-3 mt-3">
                         <h3><%= room.listing_name %></h3>
-                        <div class="text-align-bottom">
-                            <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_path(room), method: :delete, data: { confirm: "You sure?" } %>
+                        <div class="text-align-bottom text-danger">
+                            <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_path(room), method: :delete, data: { confirm: "You sure?" } %> <%= "( Delete )" %>
                         </div>
                     </div> 
                     <div class="offset-7 mt-5">

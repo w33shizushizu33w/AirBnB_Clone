@@ -26,7 +26,11 @@
             </li>
             <li class="list-group-item">
                 <%= link_to "Amenities", amenities_room_path %>
-                <% if @room.tv == true || @room.kitchen == true || @room.internet == true || @room.heating == true || @room.air_conditioning == true %>
+                <% if @room.tv == true || @room.kitchen == true %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% elsif @room.internet == true || @room.heating == true %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% elsif @room.air_conditioning == true %>
                     <%= raw("<i class='fas fa-check text-warning'></i>") %>
                 <% end %>
             </li>
