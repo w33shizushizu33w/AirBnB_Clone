@@ -1,0 +1,40 @@
+<div class="card mt-4 w-10" style="height: 10rem">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <%= link_to "Listings", listing_room_path %>
+                <% if @room.home_type? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Price", price_room_path %>
+                <% if @room.price? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Description", description_room_path %>
+                <% if @room.listing_name? || @room.summery? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Photos", photos_room_path %>
+                <% if @room.images.any? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Amenities", amenities_room_path %>
+                <% if @room.tv == true || @room.kitchen == true || @room.internet == true || @room.heating == true || @room.air_conditioning == true %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Location", location_room_path %>
+                <% if @room.is_active? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+        </ul>
+</div>

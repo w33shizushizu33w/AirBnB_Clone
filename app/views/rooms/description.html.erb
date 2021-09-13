@@ -1,0 +1,28 @@
+<%= provide(:title, "Description") %>
+<div class="row mx-4">
+    <div class="col-2">
+        <%= render 'rooms/menu' %>
+    </div>
+    <div class="col-10">       
+        <div class="card container d-flex justify-content-center mt-4">
+            <div class="card-header">
+                <h3>Description<h3>
+            </div>
+            <%= form_for(@room) do |f| %>
+            <div class="card-body">
+                <div class="form-group mx-4">
+                    <%= f.label :listing_name %>
+                    <%= f.text_field :listing_name, class: "form-control" %>
+                </div>
+                <div class="form-group mx-4">
+                    <%= f.label :summery %>
+                    <%= f.text_area :summery, class: "form-control" %>
+                </div>
+            </div>
+            <div class="text-center pb-4">
+                <%= f.submit "Update Description", class: "btn btn-outline-dark" %>
+            </div>
+            <% end %>
+        </div>       
+    </div>
+</div>
