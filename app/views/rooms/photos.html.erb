@@ -18,6 +18,20 @@
                 <%= f.submit "Update Photo", class: "btn btn-outline-dark" %>
             </div>
             <% end %>
+            <div class="card-group mx-5">
+                <div class="card mx-4" style="width: 18rem;">
+                    <%= image_tag "house1.jpeg", class: "d-block mx-auto img-fluid w-100" %>
+                    <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_image_path(@room), method: :delete, data: { confirm: "You sure?" } %>
+                </div>
+                <div class="card mx-4" style="width: 18rem;">
+                    <%= image_tag "house2.jpg", class: "d-block mx-auto img-fluid w-100" %>
+                    <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_image_path(@room), method: :delete, data: { confirm: "You sure?" } %>
+                </div>
+                <div class="card mx-4" style="width: 18rem;">
+                    <%= image_tag "house3.jpg", class: "d-block mx-auto img-fluid w-100" %>
+                    <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_image_path(@room), method: :delete, data: { confirm: "You sure?" } %>
+                <div class="card-body">
+            </div>           
         </div>       
     </div>
 </div>
@@ -29,4 +43,4 @@
         $("#room_image").val("");
         }
     });
-    </script>
+</script>
