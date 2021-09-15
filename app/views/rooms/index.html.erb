@@ -13,8 +13,8 @@
                     <%= image_tag room.images.first.image, style: 'width: 100px; height: 100px;' %>
                     <div class="ml-3 mt-3">
                         <h3><%= room.listing_name %></h3>
-                        <div class="text-align-bottom text-danger">
-                            <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_path(room), method: :delete, data: { confirm: "You sure?" } %> <%= "( Delete )" %>
+                        <div class="text-align-bottom">
+                            <%= link_to raw("<i class='fa fa-trash text-danger'></i> Delete"), room_path(room), method: :delete, data: { confirm: "You sure?" } %>
                         </div>
                     </div> 
                     <div class="offset-7 mt-5">

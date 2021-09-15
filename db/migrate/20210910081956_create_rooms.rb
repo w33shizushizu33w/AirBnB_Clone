@@ -16,7 +16,8 @@ class CreateRooms < ActiveRecord::Migration[5.2]
       t.boolean :heating
       t.boolean :air_conditioning
       t.boolean :is_active
-
+      t.text :address
+      
       t.timestamps
     end
   end

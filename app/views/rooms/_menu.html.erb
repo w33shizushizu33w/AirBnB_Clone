@@ -26,22 +26,19 @@
             </li>
             <li class="list-group-item">
                 <%= link_to "Amenities", amenities_room_path %>
-                <% if @room.tv == true || @room.kitchen == true %>
                     <%= raw("<i class='fas fa-check text-warning'></i>") %>
-                <% elsif @room.internet == true || @room.heating == true %>
-                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
-                <% elsif @room.air_conditioning == true %>
-                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
-                <% end %>
             </li>
             <li class="list-group-item">
                 <%= link_to "Location", location_room_path %>
-                <% if @room.is_active? %>
+                <% if @room.address? %>
                     <%= raw("<i class='fas fa-check text-warning'></i>") %>
                 <% end %>
             </li>
             <li class="list-group-item text-center">
-                <%= link_to "Publish", href="#", class: "btn btn-dark w-10" %>
+            <%= form_for(@room) do |f| %>
+                <%= f.hidden_field :is_active, value: true %>
+                    <%= f.submit "Publish", class: "btn btn-dark w-10", disabled: !is_ready_to_publish(@room) %>
+            <% end %>
             </li>
         </ul>
 </div>

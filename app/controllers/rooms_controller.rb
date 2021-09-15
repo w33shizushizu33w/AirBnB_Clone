@@ -19,6 +19,7 @@ class RoomsController < ApplicationController
   end
 
   def photos
+    @image = @room.images
   end
 
   def amenities
@@ -54,14 +55,14 @@ class RoomsController < ApplicationController
   end
   def destroy
     Room.find(params[:id]).destroy
-    redirect_to room_path
+    redirect_to room_pathredirect_back(fallback_location: root_path)
   end
 
   private
   def room_params
     params.require(:room).permit(:user_id, :listing_name, :summery, :home_type, :room_type, 
                                  :accommodate, :bedroom, :bathroom, :price, :tv, :kitchen, 
-                                 :internet, :heating, :air_conditioning, :is_active,
+                                 :internet, :heating, :air_conditioning, :is_active, :address,
                                  images_attributes: [ :id, :listing_id ])
   end
 

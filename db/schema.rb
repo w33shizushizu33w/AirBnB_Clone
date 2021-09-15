@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_072533) do
     t.boolean "heating"
     t.boolean "air_conditioning"
     t.boolean "is_active"
+    t.text "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
