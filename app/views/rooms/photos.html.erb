@@ -22,7 +22,7 @@
                 <% @image.each do |img| %>
                 <div class="card mx-4 col-4">
                     <%= image_tag img.image, class: "d-block mx-auto img-fluid w-100" %>
-                    <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_image_path(@room.id, img.id), method: :delete, data: { confirm: "You sure?" } %>
+                    <%= link_to raw("<i class='fa fa-trash text-danger'></i>"), room_image_path(@room.id,img.id), method: :delete, data: { confirm: "You sure?" } %>
                 </div>
                 <% end %>
             </div>           

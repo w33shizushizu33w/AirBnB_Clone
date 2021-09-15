@@ -9,6 +9,13 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
+  def show
+    @rooms = Room.all
+    @room = Room.new
+    @room = Room.find(params[:id])
+    @user = User.find(params[:id])
+  end
+
   def listing
   end
 
