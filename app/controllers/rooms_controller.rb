@@ -47,15 +47,15 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     if @room.update_attributes(room_params)
       flash[:success] = "Saved successfully!"
-      redirect_back(fallback_location: root_path)
     else
       flash[:danger] = "Editing failed."
       render 'edit'
     end
+    redirect_back(fallback_location: root_path)
   end
   def destroy
     Room.find(params[:id]).destroy
-    redirect_to room_pathredirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path)
   end
 
   private
