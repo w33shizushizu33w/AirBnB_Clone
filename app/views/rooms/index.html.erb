@@ -1,0 +1,30 @@
+<%= provide(:title, "Rooms") %>
+<div class="row mx-4">
+    <div class="col-2">
+        <%= render 'form' %>
+    </div>
+    <div class="col-10">
+        <div class="card container mt-4">
+            <div class="card-header">
+                <h3>Your Listings<h3>
+            </div>   
+                <% @rooms.each do |room| %> 
+                <div class="card-body row">            
+                    <%= image_tag room.images.first.image, style: 'width: 100px; height: 100px;' %>
+                    <div class="ml-3 mt-3">
+                        <h3><%= room.listing_name %></h3>
+                        <div class="text-align-bottom">
+                            <%= link_to raw("<i class='fa fa-trash text-danger'></i> Delete"), room_path(room), method: :delete, data: { confirm: "You sure?" } %>
+                        </div>
+                    </div> 
+                    <div class="offset-7 mt-5">
+                        <%= link_to "Up Date", listing_room_path(room), class: "btn btn-outline-dark" %> 
+                    </div> 
+                    <h6>--------------------------------------------------------------------------------------------------------------------------------------------</h6>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,44 @@
+<div class="card mt-4 w-10" style="height: 10rem">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <%= link_to "Listings", listing_room_path %>
+                <% if @room.home_type? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Price", price_room_path %>
+                <% if @room.price? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Description", description_room_path %>
+                <% if @room.listing_name? || @room.summery? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Photos", photos_room_path %>
+                <% if @room.images.any? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Amenities", amenities_room_path %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+            </li>
+            <li class="list-group-item">
+                <%= link_to "Location", location_room_path %>
+                <% if @room.address? %>
+                    <%= raw("<i class='fas fa-check text-warning'></i>") %>
+                <% end %>
+            </li>
+            <li class="list-group-item text-center">
+            <%= form_for(@room) do |f| %>
+                <%= f.hidden_field :is_active, value: true %>
+                    <%= f.submit "Publish", class: "btn btn-dark w-10", disabled: !is_ready_to_publish(@room) %>
+            <% end %>
+            </li>
+        </ul>
+</div>

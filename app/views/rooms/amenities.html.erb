@@ -1,0 +1,32 @@
+<%= provide(:title, "Amenities") %>
+<div class="row mx-4">
+    <div class="col-2">
+        <%= render 'rooms/menu' %>
+    </div>
+    <div class="col-10">       
+        <div class="card container d-flex justify-content-center mt-4">
+            <div class="card-header">
+                <h3>Amenities<h3>
+            </div>
+            <div class="card-body row justify-content-center">
+                <%= form_for(@room) do |f| %>
+                    <fieldset>                       
+                        <%= f.check_box :tv %>
+                        <%= f.label :tv, "TV" %><br/>
+                        <%= f.check_box :kitchen %>
+                        <%= f.label :kitchen, "Kitchen" %><br/>
+                        <%= f.check_box :internet %>
+                        <%= f.label :internet, "Internet" %><br/>
+                        <%= f.check_box :heating %>
+                        <%= f.label :heating, "Heating" %><br/>
+                        <%= f.check_box :air_conditioning %>
+                        <%= f.label :air_conditioning, "Air_conditioning" %><br/>
+                    </fieldset>
+            </div>
+            <div class="text-center pb-4">
+                <%= f.submit "Update Amenities", class: "btn btn-outline-dark" %>
+            </div>
+            <% end %>
+        </div>       
+    </div>
+</div>
