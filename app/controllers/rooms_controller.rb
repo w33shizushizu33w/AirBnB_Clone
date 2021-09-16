@@ -14,6 +14,7 @@ class RoomsController < ApplicationController
     @room = Room.new
     @room = Room.find(params[:id])
     @user = User.find(params[:id])
+    @image = @room.images
   end
 
   def listing
@@ -60,6 +61,7 @@ class RoomsController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
+  
   def destroy
     Room.find(params[:id]).destroy
     redirect_back(fallback_location: root_path)
