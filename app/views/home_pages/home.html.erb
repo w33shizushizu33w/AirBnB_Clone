@@ -14,24 +14,15 @@
     <h1>Homes</h1>
 </div>
 <div class="card-group mx-5">
-    <div class="card mx-4" style="width: 18rem;">
-        <%= image_tag "house1.jpeg", class: "d-block mx-auto img-fluid w-100" %>
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <% @rooms.first(3).each do |room| %>
+        <div class="card mx-4" style="width: 18rem;">
+            <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
+                <div class="card-body">
+                    <h4 class="card-text"><%= room.listing_name %></h4>
+                    <p class="card-text"><%= room.summery %></p>
+                </div>
         </div>
-    </div>
-    <div class="card mx-4" style="width: 18rem;">
-        <%= image_tag "house2.jpg", class: "d-block mx-auto img-fluid w-100" %>    
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
-    <div class="card mx-4" style="width: 18rem;">
-        <%= image_tag "house3.jpg", class: "d-block mx-auto img-fluid w-100" %>
-        <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-    </div>
+    <% end %>
 </div>
 <div class="ml-5 mt-5">
     <h1>Cities</h1>

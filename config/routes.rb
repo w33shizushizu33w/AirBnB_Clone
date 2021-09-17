@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       get 'photos'
       get 'amenities'
       get 'location'
+      get 'more_listings'
     end
   end
 end

@@ -7,5 +7,7 @@ class Room < ApplicationRecord
     validates :bathroom, presence: true
    
     
-    has_many :images         
+    has_many :images    
+    geocoded_by :address     
+    after_validation :geocode, if: :address_changed?
 end

@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :fetch_room, except: [:new, :create, :index]
   def new
     @room = Room.new
@@ -34,6 +35,14 @@ class RoomsController < ApplicationController
   end
 
   def location 
+  end
+
+  def more_listings
+    @rooms = Room.all
+    @rooms = Room.paginate(page: params[:page], per_page: 3 )
+    @room = Room.new
+    @users = User.all
+    @user = User.find(params[:id])
   end
 
   def create

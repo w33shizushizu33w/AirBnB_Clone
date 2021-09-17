@@ -1,0 +1,18 @@
+<%= provide(:title, "All Listings") %>
+<div class="text-center mt-4">
+    <h1><%= @user.name %> All Listings</h1>
+</div>
+<div class="card-group mx-5 mt-3">
+    <% @rooms.each do |room| %>
+        <div class="card mx-4 col-md-4" style="width: 18rem;">
+            <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
+                <div class="card-body">
+                    <h3><%= room.listing_name %></h3>
+                    <p class="card-text"><%= room.summery %></p>
+                </div>
+        </div>
+    <% end %>
+</div>
+<div class="row d-flex justify-content-center mt-3">
+    <%= will_paginate @rooms %>   
+</div>
