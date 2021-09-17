@@ -36,6 +36,14 @@ class RoomsController < ApplicationController
   def location 
   end
 
+  def more_listings
+    @rooms = Room.all
+    @rooms = Room.paginate(page: params[:page], per_page: 3 )
+    @room = Room.new
+    @users = User.all
+    @user = User.find(params[:id])
+  end
+
   def create
     @room = Room.new(room_params)
     if @room.save

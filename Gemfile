@@ -20,6 +20,7 @@ gem 'omniauth-facebook'
 gem 'toastr-rails'
 gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'active_storage_validations', '0.8.9'
+
 group :development do
   gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 end
