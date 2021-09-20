@@ -5,6 +5,7 @@ class HomePagesController < ApplicationController
   end
 
   def about
+   @users = User.all
   end
 
   def contact

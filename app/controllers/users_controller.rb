@@ -4,5 +4,6 @@ class UsersController < ApplicationController
     @users = User.all
     @rooms = Room.all
     @room = Room.new
+    @room_count = Room.count("*")
   end
 end

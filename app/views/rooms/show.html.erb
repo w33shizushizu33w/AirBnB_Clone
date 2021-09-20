@@ -21,7 +21,11 @@
 
 <div class="mt-4">
     <div class="col-10">
+    <% if @image.present? %>
         <%= image_tag @room.images.first.image, class: "d-block offset-2 img-fluid w-50" %>
+    <% else %>
+        <%= image_tag "no_image.jpg", class: "d-block offset-2 img-fluid w-50" %>
+    <% end %>
     </div>    
 </div>
 <div class="mt-4 offset-2">   
@@ -120,7 +124,6 @@
     </div>
 <% else %>
     <%= image_tag "no_image.jpg", class: "mw-100 d-block gallery h-100" %>
-    <p>No Images Found</p>
 <% end%>
 </div>
 <hr width="1200" >
