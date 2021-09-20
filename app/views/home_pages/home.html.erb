@@ -16,7 +16,11 @@
 <div class="card-group mx-5">
     <% @rooms.first(3).each do |room| %>
         <div class="card mx-4" style="width: 18rem;">
-            <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
+            <% if room.images.present? %>
+                <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
+            <% else %>
+                <%= image_tag "no_image.jpg", class: "d-block mx-auto img-fluid w-100" %>
+            <% end %>
                 <div class="card-body">
                     <h4 class="card-text"><%= room.listing_name %></h4>
                     <p class="card-text"><%= room.summery %></p>

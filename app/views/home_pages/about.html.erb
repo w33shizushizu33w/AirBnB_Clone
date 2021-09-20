@@ -1,2 +1,19 @@
-<h1>HomePages#about</h1>
-<p>Find me in app/views/home_pages/about.html.erb</p>
+<%= provide(:title, "About") %>
+<div class="card container w-100 mt-4">
+    <div class="card-header container w-100">
+        <h5>About Us</h5>
+    </div>
+    <div class="card-body container">
+    <% @users.each do |user| %>  
+        <div class="row card-title">   
+            <%= gravatar_for user, class: "card-img" %>
+            <div class="group-fom">
+                <h2 class="ml-3 mt-2"><%= user.name %></h2>
+                <p class="ml-3"><%= user.email %></p>
+            </div>
+        </div>
+    <% end %>
+        <h3 class="card-text">With supporting text below as a natural lead-in to additional content.</h3>
+        <%= link_to "Go HOME", root_path, class: "btn btn-dark" %>
+    </div>
+</div>
