@@ -8,6 +8,8 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.all
     @room = Room.new
+    @search = Room.ransack(params[:q])
+    @rooms = @search.result
   end
 
   def show

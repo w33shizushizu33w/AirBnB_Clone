@@ -2,6 +2,8 @@ class HomePagesController < ApplicationController
   def home
     @rooms = Room.all
     @room = Room.new
+    @search = Room.ransack(params[:q])
+    @rooms = @search.result
   end
 
   def about

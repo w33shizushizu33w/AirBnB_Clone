@@ -7,6 +7,6 @@
                     password: password,
                     password_confirmation: password)
     user.skip_confirmation!
-     user.save!
+    user.save!
 end
    
