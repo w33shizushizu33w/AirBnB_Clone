@@ -57,3 +57,8 @@
         </div>
     </div>
 </div>
+<%= search_form_for @q do |f| %>
+ <%= f.label :listing_name_or_summery_or_address_cont %>
+ <%= f.search_field :listing_name_or_summery_or_email_cont %>
+ <%= f.submit %>
+<% end %>
