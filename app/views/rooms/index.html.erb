@@ -16,7 +16,7 @@
                         <%= image_tag "no_image.jpg", style: "width: 100px; height: 100px;" %>
                     <% end %>
                     <div class="ml-3 mt-3">
-                        <h3><%= room.listing_name %></h3>
+                        <h3><%= link_to room.listing_name, room_path(room.id) %></h3>
                         <div class="text-align-bottom">
                             <%= link_to raw("<i class='fa fa-trash text-danger'></i> Delete"), room_path(room), method: :delete, data: { confirm: "You sure?" } %>
                         </div>

@@ -7,7 +7,7 @@
                 <%= image_tag "no_image.jpg", class: "d-block mx-auto img-fluid w-100" %>
             <% end %>
                 <div class="card-body">
-                    <h4 class="card-text"><%= room.listing_name %></h4>
+                    <h4 class="card-text"><%= link_to room.listing_name, room_path(room.id) %></h4>
                     <p class="card-text"><%= room.summery %></p>
                 </div>
         </div>

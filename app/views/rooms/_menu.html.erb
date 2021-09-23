@@ -36,9 +36,9 @@
             </li>
             <li class="list-group-item text-center">
             <%= form_for(@room) do |f| %>
-                <%= f.hidden_field :is_active, value: true %>
-                    <%= f.submit "Publish", class: "btn btn-dark w-10", disabled: !is_ready_to_publish(@room) %>
-            <% end %>
+                <%= f.hidden_field :is_active, value: true %> 
+                <%= f.submit "Publish", class: "btn btn-dark w-10", disabled: !is_ready_to_publish(@room) %>  
+            <% end %> 
             </li>
         </ul>
 </div>

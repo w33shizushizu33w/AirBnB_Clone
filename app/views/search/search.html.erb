@@ -1,0 +1,180 @@
+<%= provide(:title, "Search") %>
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyANRR2kNcJ85_61PYyROVKQrRjRtqhpEUs&callback=initialize'></script>
+<script type='text/javascript'>
+    document.addEventListener("DOMContentLoaded", function() {
+        var location = [];
+        <% @listing_list.each do |pin| %>
+            location.push({lat: Number("<%= pin.latitude %>"), lng: Number("<%= pin.longitude %>")});
+        <% end %>
+        
+        var infoWindow = [];
+        <% @listing_list.each do |info| %>
+            infoWindow.push(new google.maps.InfoWindow({
+                content: '<div id="content"><%= info.price %></div>'
+            }));
+        <% end %>
+
+        var map = new google.maps.Map(document.getElementById('map'),{
+            center: location[0],
+            zoom: 14
+        });
+
+        var marker = [];
+        for(var i=0; i<location.length; i++){
+            marker[i] = new google.maps.Marker({
+                position: location[i],
+                map: map
+            });
+        }
+        for(var i=0; i<location.length; i++){
+            infoWindow[i].open(map, marker[i]);
+        }
+    });
+</script>
+
+<div class="offset-4 col-5 mt-5">
+    <button type="button" class="btn btn-dark w-25" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Filter
+    </button>
+</div>
+<div class="collapse col-8 mt-4" id="collapseExample">
+    <div class="border p-3">
+        <form>
+            <div class="form-group">
+                <label for="formControlRange">Example Range input</label>
+                <input type="range" class="form-control-range" id="formControlRange">
+            </div>
+        </form>
+        <form class="form-inline">
+            <h5>Price Range</h5>
+            <div class="form-group ml-5">
+                <%= search_form_for @search, url: search_path do |f| %>
+                    <%= f.label :price, "Min Price" %>
+                    <%= f.search_field :price_cont, class: "form-control mr-sm-2 ml-3" %>
+                    <%= f.label :price, "Max Price", class: "ml-5" %>
+                    <%= f.search_field :price_cont, class: "form-control mr-sm-2 ml-3" %>
+                <% end %>
+            </div>
+        </form>
+    </div>
+    <div class="border p-3">
+        <form class="form-inline">
+            <h5>Travel Schedule</h5>
+            <div class="form-group ml-3">
+                <%= search_form_for @search, url: search_path do |f| %>
+                    <input class="form-control mr-sm-2 ml-3" type="search" placeholder="Check in" aria-label="Search">
+                    <input class="form-control mr-sm-2 ml-3" type="search" placeholder="Check out" aria-label="Search">
+                <% end %>
+            </div>
+        </form>
+    </div>
+    <div class="border p-3">
+        <form class="form-inline">
+            <h5>Home Type</h5>
+            <div class="form-group ml-5">
+                <%= search_form_for @search, url: search_path do |f| %>
+                    <div class="form-check ml-3">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Entire</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Ptivate</label>
+                    </div>
+                    <div class="form-check ml-3">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Shared</label>
+                    </div>
+                <% end %>
+            </div>
+        </form>
+    </div>
+    <div class="border p-3">
+        <div class="row ml-5">
+           <%= search_form_for @search, url: search_path do |f| %>
+            <div class="card-body row">
+                <div class="form-group mx-5">
+                    <h6>Accommodate</h6>
+                    <%= f.select :accommodate, options_for_select([
+                                ["1 Guest", 1],
+                                ["2 Guests", 2],
+                                ["3 Guests", 3],
+                                ["4+ Guests", 4]
+                            ], selected: f.object.accommodate), include_blank: true, class: "col-12" %>
+                </div>
+                <div class="form-group mx-5">
+                    <h6>Bedroom</h6>
+                    <%= f.select :bedroom, options_for_select([
+                                ["1 Guest", 1],
+                                ["2 Guests", 2],
+                                ["3 Guests", 3],
+                                ["4+ Guests", 4]
+                            ], selected: f.object.bedroom), include_blank: true, class: "col-12" %>
+                </div>
+                <div class="form-group mx-5">
+                    <h6>Bathroom</h6>
+                    <%= f.select :bathroom, options_for_select([
+                                ["1 Guest", 1],
+                                ["2 Guests", 2],
+                                ["3 Guests", 3],
+                                ["4+ Guests", 4]
+                            ], selected: f.object.bathroom), include_blank: true, class: "col-12" %>
+                </div>
+            </div>
+           <% end %>
+        </div>
+    </div>
+    <div class="border p-3">
+        <form class="form-inline">
+            <h5>Amenities</h5>
+            <div class="form-group ml-4">
+                <%= search_form_for @search, url: search_path do |f| %>
+                    <div class="form-check ml-5">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">TV</label>
+                    </div>
+                    <div class="form-check ml-5">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Kitchen</label>
+                    </div>
+                    <div class="form-check ml-5">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Internet</label>
+                    </div>
+                    <div class="form-check ml-5">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Heating</label>
+                    </div>
+                    <div class="form-check ml-5">
+                        <%= check_box_tag "q[internet_eq]" ,true %>
+                        <label class="form-check-label" for="formCheck-1">Air conditioning</label>
+                    </div>
+                <% end %>
+            </div>
+        </form>
+    </div>
+    <%= search_form_for @search, url: search_path do |f| %>
+        <%= link_to "Search", search_path, class: "btn btn-outline-dark my-2 my-sm-0 offset-11" %>
+    <% end %>
+</div>
+
+<div class="card-group mx-5 mt-3 row">
+    <% if @listing_list.present? == false %>
+        <p>No listings found</p>
+    <% else %>
+        <% @listing_list.each do |room| %>
+        <div class="card mx-4" style="width: 18rem; height: 300px">
+            <% if room.images.any? %>
+                <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
+            <% else %>
+                <%= image_tag "no_image.jpg", class: "d-block mx-auto img-fluid w-100" %>
+            <% end %>
+            <div class="card-body">
+                <h4 class="card-text"><%= link_to room.listing_name, room_path(room.id) %></h4>
+                <p class="card-text"><%= room.summery %></p>
+            </div>
+        </div>
+    <% end %>
+    <div id="map" style="min-width:300px; max-width:300px; height: 400px; "></div>
+    <% end %>
+</div>
