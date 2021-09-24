@@ -1,0 +1,153 @@
+<%= provide(:title, "Search") %>
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyANRR2kNcJ95_61PYyROVKQrRjRtqhpEUs&callback=initialize'></script>
+<script type='text/javascript'>
+    document.addEventListener("DOMContentLoaded", function() {
+        var location = [];
+        <% @listing_list.each do |pin| %>
+            location.push({lat: Number("<%= pin.latitude %>"), lng: Number("<%= pin.longitude %>")});
+        <% end %>
+        
+        var infoWindow = [];
+        <% @listing_list.each do |info| %>
+            infoWindow.push(new google.maps.InfoWindow({
+                content: '<div id="content"><%= info.price %></div>'
+            }));
+        <% end %>
+
+        var map = new google.maps.Map(document.getElementById('map'),{
+            center: location[0],
+            zoom: 14
+        });
+
+        var marker = [];
+        for(var i=0; i<location.length; i++){
+            marker[i] = new google.maps.Marker({
+                position: location[i],
+                map: map
+            });
+        }
+        for(var i=0; i<location.length; i++){
+            infoWindow[i].open(map, marker[i]);
+        }
+    });
+</script>
+
+<div class="offset-4 col-5 mt-5">
+    <button type="button" class="btn btn-dark w-25" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Filter
+    </button>
+</div>
+<div class="collapse col-8 mt-4" id="collapseExample">
+    <div class="border p-3">
+            <h5>Price Range</h5>
+            <div class="form-group ml-5">
+            <%= search_form_for @rooms, url: search_path do |f| %>
+                <%= f.label :price, "Min Price" %>
+                <%= f.number_field :price_gteq, class: "form-control mr-sm-2 ml-3 w-50" %>
+                <%= f.label :price, "Max Price" %>
+                <%= f.number_field :price_lteq, class: "form-control mr-sm-2 ml-3 w-50" %>
+            </div>
+    </div>
+    <div class="border p-3">
+            <h5>Travel Schedule</h5>
+            <div class="form-group ml-3">
+                <input class="form-control ml-5 w-50" type="search" placeholder="Check in" aria-label="Search">
+                <input class="form-control ml-5 mt-3 w-50" type="search" placeholder="Check out" aria-label="Search">
+            </div>
+    </div>
+    <div class="border p-3">
+        <div class="row ml-5">
+            <div class="card-body row">
+                <div class="form-group mr-5">
+                    <h6>Room Type</h6> 
+                     <%= f.select :room_type_eq, options_for_select([
+                                ["Entire"],
+                                ["Private"],
+                                ["Shared"]
+                            ], selected: f.object.accommodate), include_blank: true, class: "col-12" %>
+                </div>
+                <div class="form-group mx-5">
+                    <h6>Accommodate</h6>
+                    <%= f.select :accommodate_eq, options_for_select([
+                                ["1 Guest", 1],
+                                ["2 Guests", 2],
+                                ["3 Guests", 3],
+                                ["4+ Guests", 4]
+                            ], selected: f.object.accommodate), include_blank: true, class: "col-12" %>
+                </div>
+                <div class="form-group mx-5">
+                    <h6>Bedroom</h6>
+                    <%= f.select :bedroom_eq, options_for_select([
+                                ["1 Bedroom", 1],
+                                ["2 Bedrooms", 2],
+                                ["3 Bedrooms", 3],
+                                ["4+ Bedrooms", 4]
+                            ], selected: f.object.bedroom), include_blank: true, class: "col-12" %>
+                </div>
+                <div class="form-group mx-5">
+                    <h6>Bathroom</h6>
+                    <%= f.select :bathroom_eq, options_for_select([
+                                ["1 Bathroom", 1],
+                                ["2 Bathrooms", 2],
+                                ["3 Bathrooms", 3],
+                                ["4+ Bathrooms", 4]
+                            ], selected: f.object.bathroom), include_blank: true, class: "col-12" %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="border p-3">
+            <h5>Amenities</h5>
+            <div class="form-group ml-4">
+                <div class="form-check ml-5">
+                    <%= check_box_tag "q[tv_eq]" ,true %>
+                    <label class="form-check-label" for="formCheck-1">TV</label>
+                </div>
+                <div class="form-check ml-5">
+                    <%= check_box_tag "q[kitchen_eq]" ,true %>
+                    <label class="form-check-label" for="formCheck-1">Kitchen</label>
+                </div>
+                <div class="form-check ml-5">
+                    <%= check_box_tag "q[internet_eq]" ,true %>
+                    <label class="form-check-label" for="formCheck-1">Internet</label>
+                </div>
+                <div class="form-check ml-5">
+                    <%= check_box_tag "q[heating_eq]" ,true %>
+                    <label class="form-check-label" for="formCheck-1">Heating</label>
+                </div>
+                <div class="form-check ml-5">
+                    <%= check_box_tag "q[air_conditioning_eq]" ,true %>
+                    <label class="form-check-label" for="formCheck-1">Air conditioning</label>
+                </div>
+                <div>
+                    <%= f.submit "Search", class: "btn btn-outline-dark my-2 my-sm-0 offset-10" %>
+                </div>
+            </div>
+            <% end %>
+    </div>
+</div>
+<div class="card-group mx-5 mt-3 row">
+    <% if @listing_list.present? == false %>
+        <p>No listings found</p>
+    <% else %>
+        <% @listing_list.each do |room| %>
+        <div class="card mx-4" style="width: 18rem; height: 500px">
+            <% if room.images.any? %>
+                <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
+            <% else %>
+                <%= image_tag "no_image.jpg", class: "d-block mx-auto img-fluid w-100" %>
+            <% end %>
+            <div class="card-body">
+                <h4 class="card-text"><%= link_to room.listing_name, room_path(room.id) %></h4>
+                <p class="card-text"><%= room.summery %></p>
+                <p class="card-text"><%= room.price %></p>
+                <p class="card-text"><%= room.room_type %></p>
+            </div>
+        </div>
+        <% end %>
+    <div id="map" style="min-width:300px; max-width:300px; height: 400px; "></div>
+    <% end %>
+</div>
+<div class="row d-flex justify-content-center mt-3">
+    <%= will_paginate @listing_list %>   
+</div>

@@ -4,6 +4,7 @@
         <h3>Create your beautiful place<h3>
     </div>
     <%= form_for(@room) do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="card-body row justify-content-center">
         <div class="form-group mx-5">
             <h6>Home Type</h6>

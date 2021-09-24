@@ -10,20 +10,20 @@
             </div>
             <div class="card-body row justify-content-center">
                 <%= form_for(@room) do |f| %>
-                    <fieldset>                       
+                    <fieldset class="form-inline">                       
                         <%= f.check_box :tv %>
                         <%= f.label :tv, "TV" %><br/>
-                        <%= f.check_box :kitchen %>
+                        <%= f.check_box :kitchen, class: "ml-5" %>
                         <%= f.label :kitchen, "Kitchen" %><br/>
-                        <%= f.check_box :internet %>
+                        <%= f.check_box :internet, class: "ml-5" %>
                         <%= f.label :internet, "Internet" %><br/>
-                        <%= f.check_box :heating %>
+                        <%= f.check_box :heating, class: "ml-5" %>
                         <%= f.label :heating, "Heating" %><br/>
-                        <%= f.check_box :air_conditioning %>
+                        <%= f.check_box :air_conditioning, class: "ml-5" %>
                         <%= f.label :air_conditioning, "Air_conditioning" %><br/>
                     </fieldset>
                     <div class="text-center pb-4">
-                        <%= f.submit "Update Amenities", class: "btn btn-outline-dark" %>
+                        <%= f.submit "Update Amenities", class: "btn btn-outline-dark mt-5" %>
                     </div>
                 <% end %>
             </div>

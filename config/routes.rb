@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'home_pages/home'
   get 'home_pages/about', to: 'home_pages#about'
   get 'home_pages/contact', to: 'home_pages#contact'
+  get 'search', to: 'search#search'
   resources :users
   resources :rooms
 

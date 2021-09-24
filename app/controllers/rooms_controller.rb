@@ -8,13 +8,13 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.all
     @room = Room.new
+    @search = Room.ransack(params[:q])
+    @rooms = @search.result
   end
 
   def show
-    @rooms = Room.all
-    @room = Room.new
     @room = Room.find(params[:id])
-    @user = User.find(params[:id])
+    @user = User.find(@room.user_id)
     @image = @room.images
   end
 
@@ -66,9 +66,12 @@ class RoomsController < ApplicationController
       flash[:success] = "Saved successfully!"
     else
       flash[:danger] = "Editing failed."
-      render 'edit'
     end
-    redirect_back(fallback_location: root_path)
+    if @room.is_active == true
+      redirect_to room_path(@room.id)
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
   
   def destroy
