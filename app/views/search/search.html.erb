@@ -126,12 +126,12 @@
             <% end %>
     </div>
 </div>
-<div class="card-group mx-5 mt-3 row">
+<div class="card-group mx-5 mt-3">
     <% if @listing_list.present? == false %>
         <p>No listings found</p>
     <% else %>
         <% @listing_list.each do |room| %>
-        <div class="card mx-4" style="width: 18rem; height: 500px">
+        <div class="card mx-4" style="width: 18rem;">
             <% if room.images.any? %>
                 <%= image_tag room.images.first.image, class: "d-block mx-auto img-fluid w-100" %>
             <% else %>
