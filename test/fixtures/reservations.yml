@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  room_id: 1
+  check_in: 2021-09-24
+  check_out: 2021-09-24
+  price: 1.5
+  total_price: 1.5
+
+two:
+  user_id: 1
+  room_id: 1
+  check_in: 2021-09-24
+  check_out: 2021-09-24
+  price: 1.5
+  total_price: 1.5

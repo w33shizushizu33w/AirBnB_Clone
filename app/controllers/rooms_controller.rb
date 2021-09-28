@@ -16,6 +16,8 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @user = User.find(@room.user_id)
     @image = @room.images
+    @search = Room.ransack(params[:q])
+    @rooms = @search.result
   end
 
   def listing
@@ -79,6 +81,22 @@ class RoomsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def check_current_bookings
+    today = Date.today
+    booking = @room.reservations.where("check_in_date >= ? OR check_out_date >= ?", today, today)
+    
+    render json: booking
+  end
+
+  def review_booking
+    check_in_date = Date.parse(params[:check_in_date])
+    check_out_date = Date.parse(params[:check_out_date])
+
+    result = { conflict: check_conflicts(check_in_date, check_out_date, @room) }
+
+    render json: result
+  end
+
   private
   def room_params
     params.require(:room).permit(:user_id, :listing_name, :summery, :home_type, :room_type, 
@@ -89,5 +107,10 @@ class RoomsController < ApplicationController
 
   def fetch_room
     @room = Room.find(params[:id])
+  end
+
+  def check_conflicts(check_in_date, check_out_date, room)
+    check = @room.reservations.where('? < check_in_date AND check_out_date < ?', check_in_date, check_out_date)
+    check.size > 0 ? true :false
   end
 end

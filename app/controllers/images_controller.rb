@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
        @room = Room.find(params[:room_id])
        if params[:images]
         params[:images].each do |img|
-            @room.images.create(image: img)
+        @room.images.create(image: img)
        end
 
         @images = @room.images
