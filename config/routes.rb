@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :rooms do
     resources :images, only: [:create, :destroy]
+    resources :reservations
     member do
       get 'listing'
       get 'description'
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
       get 'amenities'
       get 'location'
       get 'more_listings'
+      get 'check_current_bookings'
+      get 'review_booking'
     end
   end
 end
